@@ -1,1 +1,65 @@
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+@import "config/bootstrap_variables";
+
+// External libraries
 @import "bootstrap/scss/bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"); // font-family: 'Space Mono', monospace;
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap'); // font-family: 'Quicksand', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap'); // font-family: 'Major Mono Display';
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap"); // font-family: 'Quicksand', sans-serif;
+
+
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+@import "mapbox-gl/dist/mapbox-gl";
+
+body {
+  padding-bottom: 48px;
+  background-color: #f2e9e4;
+}
+
+body {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+body {
+  font-family: "Quicksand", sans-serif;
+}
+
+h1 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h2 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h3 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h4 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h5 {
+  font-family: "Quicksand", sans-serif;
+}
+
+h6 {
+  font-family: "Quicksand", sans-serif;
+}
+
+
+p {
+  font-family: 'Quicksand', sans-serif;
+}
