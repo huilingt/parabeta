@@ -1,0 +1,24 @@
+<div id="message-<%= message.id %>" class="message">
+  <div class="community-message-card">
+
+    <div class="message-wrapper d-flex justify-content-between">
+
+      <%# Description %>
+      <div>
+          <div class="message-description p-3">
+            <%# Review comments %>
+            <small>
+              <span><h6 class="mt-2"><%= message.content[0..35] %></h6></span>
+            </small>
+          </div>
+
+          <%# Time sent ago %>
+          <% timecreated = message.created_at %>
+          <i class="d-flex justify-content-start ms-3 mt-1"><%= time_ago_in_words(timecreated).gsub('about','') + ' ago' %></i>
+      </div>
+
+    <%= cl_image_tag message.user.photo.key, class: :av , height: 150, width: 150, crop: :fill, gravity: :face %>
+
+    </div> <!-- ./ message-wrapper -->
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<%= cl_image_tag @facility.photo.key, height: 300, width: 400, crop: :fill %>
+
+<div class="facility-details-container p-3">
+  <div class="d-flex justify-content-between align-items-center">
+    <h1 class="fs-1"><%= @facility.name %></h1>
+    <h6><%= pluralize @facility.reviews.size,"review" %></h6>
+  </div>
+
+  <div class="d-flex align-items-center justify-content-between">
+
+    <div class="row five-stars mt-3">
+      <ul>
+        <% (1..5).each do |i| %>
+          <% if i <= @average_rating %>
+              <li class="fa fa-star fa-2xl selected"></li>
+          <% else %>
+              <li class="fa fa-star fa-2xl"></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="facility-details">
+
+    <div class="opening-hours d-flex p-2">
+      <i class="fa-regular fa-clock mt-1"></i>
+      <div class="d-line ms-4">
+        <h3 class="fs-3">Opening Hours</h3>
+        <% @openinghours.each do |openinghour| %>
+            <li ><%= openinghour.day %>: <%= openinghour.hours %></li>
+          <% end %>
+      </div>
+    </div>
+
+    <div class="address d-flex mt-2 p-2">
+      <i class="fa-solid fa-location-dot mt-2"></i>
+      <div class="d-line ms-4 ">
+        <h3 class="fs-3">Address</h3>
+        <h6 class="fs-5"><%= @facility.address %></h6>
+      </div>
+    </div>
+
+    <div class="type d-flex mt-2 p-2">
+      <i class="fa-solid fa-utensils"></i>
+      <div class="d-line ms-4">
+        <h6 class="fs-5"><%= @facility.price_range %>/pax</h6>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="d-flex justify-content-center my-4">
+    <% if user_signed_in? == true %>
+      <%= link_to "Share your experience", new_facility_review_path(@facility), class: "btn btn-gradient" %>
+    <% else %>
+      <%= link_to "Review Now", new_user_session_path, class: "btn btn-gradient" %>
+    <% end %>
+  </div>
+
+
+
+</div>

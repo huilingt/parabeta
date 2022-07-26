@@ -1,0 +1,79 @@
+<div class="user-reviews ms-2">
+  <% @facility.reviews.each do |review| %>
+    <div class="user-review-card" data-controller="display-comment">
+      <div class="row user-details d-flex align-items-center p-3">
+        <%# profile image %>
+        <div class="col-2 me-3">
+          <%= cl_image_tag review.user.photo.key, class: :av , height: 100, width: 100, crop: :fill, gravity: :face %>
+        </div>
+
+        <%# Username %>
+        <div class="col-3 textblue-shadow">
+          <h2><%= review.user.username.capitalize %></h2>
+        </div>
+
+        <%# review count %>
+      </div>
+
+      <div class="icon-wrapper mb-2">
+        <div class="icon">
+          <i class="fa-solid fa-wheelchair-move"></i>
+          <h4 class="rating"><%= review.review_ratings[0] ? review.review_ratings[0].rating : "" %></h4>
+        </div>
+
+        <div class="icon">
+          <i class="fa-solid fa-mug-saucer"></i>
+          <h4 class="rating"><%= review.review_ratings[2] ? review.review_ratings[2].rating : ""  %></h4>
+        </div>
+
+        <div class="icon">
+          <i class="fa-solid fa-clipboard-user"></i>
+          <h4 class="rating"><%=  review.review_ratings[1] ? review.review_ratings[1].rating : ""  %></h4>
+        </div>
+
+        <div class="icon">
+          <i class="fa-solid fa-toilet"></i>
+          <h4 class="rating"><%=  review.review_ratings[3] ? review.review_ratings[3].rating : ""  %></h4>
+        </div>
+
+      </div>
+
+      <div class="row d-flex image-spacing mb-2">
+        <div class="col-12">
+          <%# <%= cl_image_tag 'o7b693sl20e5206soaw3zwc0pt82', height: "150px", width: "170px" %>
+
+          <% if review.photo.attached? %>
+            <%= cl_image_tag(review.photo.key, width: 300, height: 150, crop: :fill) %>
+          <% else %>
+            <%= image_tag('placeholder.png', width: 300, height: 150) %>
+          <% end %>
+        </div>
+
+      <div class="row p-1 ms-2 textblue-shadow">
+        <span><h5> <%= review.content %></h5></span>
+      </div>
+
+      <hr class="solid2">
+
+      <div class="row justify-content-evenly textblue-shadow">
+        <div class="col-3">
+          <i class="fa-regular fa-thumbs-up d-flex justify-content-evenly"><h6> Like</h6></i>
+        </div>
+
+        <div class="col-4" data-display-comment-target="comment" >
+          <i class="fa-regular fa-comment d-flex justify-content-evenly" data-action="click->display-comment#displayForm"><h6> Comment(<%= review.comments.count %>)</h6></i>
+        </div>
+
+
+        <div class="col-3">
+          <i class="fa-solid fa-share-nodes d-flex justify-content-evenly"><h6> Share</h6></i>
+        </div>
+      </div>
+
+      <div class="comment-wrapper d-none" data-display-comment-target="form">
+        <h2 class="mb-3 textblue-shadow">Comments</h2>
+        <%= render "comments/comment_card" %>
+      </div>
+    </div>
+  <% end %>
+</div>

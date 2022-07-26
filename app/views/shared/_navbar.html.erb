@@ -1,0 +1,36 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-test">
+  <div class="container-fluid">
+
+    <i class="fa-solid fa-house <%=active_class(root_path)%>">
+      <%= link_to "", root_path, class: "nav-link"%>
+    </i>
+
+    <i class="fa-solid fa-heart">
+      <%= link_to "", root_path, class: "nav-link"%>
+    </i>
+
+    <i class="fa-solid fa-house-chimney-user <%=active_class(community_path)%>">
+      <%= link_to "", community_path, class: "nav-link"  %>
+    </i>
+
+    <i class="fa-solid fa-circle-left">
+      <%= link_to "", request.referer.present? ? request.referer : root_path, class: "nav-link"%>
+    </i>
+
+    <% if user_signed_in? %>
+      <div class="dropup">
+         <%= cl_image_tag current_user.photo.key, class: :avatar , height: 150, width: 150, crop: :fill, gravity: :face %>
+
+
+        <div class="dropup-content">
+          <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+        </div>
+      </div>
+    <% else %>
+      <i class="fa-solid fa-user <%=active_class(new_user_session_path)%>">
+      <%= link_to "", new_user_session_path, class: "nav-link" %>
+      </i>
+    <% end %>
+
+  </div>
+</div>

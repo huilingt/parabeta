@@ -1,0 +1,44 @@
+<%# <img src="https://source.unsplash.com/random/?restaurants" alt="restaurants" width="100%" height="250px" object-fit="cover"> %>
+<%# <% @restaurants.each do |restaurant| %>
+  <%# <%= cl_image_tag restaurant.photo.key, height: 250, width: 400, crop: :fill %>
+<%# <% end %>
+
+<div class="d-flex justify-content-start search-position">
+  <%= form_tag search_facilities_path, method: :get do %>
+
+    <div class="row align-items-center ">
+      <div class="col-10">
+        <%= text_field_tag :name,
+                  params[:name],
+                    class: "form-control rounded-pill ms-4",
+                  placeholder: "Search by Name"%>
+
+      </div>
+
+      <div class="col-2">
+        <%= submit_tag "Search", class: "my-3 btn btn-search ms-2" %>
+      </div>
+
+    </div>
+
+  <% end %>
+  <%# <%= render "facilities/filter_modal"%>
+</div>
+
+<h1 class="p-2 mt-1 ms-1"><%= @category.name %></h1>
+
+<div class="cards container">
+
+  <% @facilities.each do |facility| %>
+    <% if facility.verified_status == true %>
+      <%= link_to facility_path(facility) do %>
+        <%= render "facilities/facility_card", facility: facility %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+</div>
+
+<div class="d-flex justify-content-center p-3">
+  <p><%= link_to "Back", root_path, class: "btn btn-long btn-lg btn-block" %></p>
+</div>

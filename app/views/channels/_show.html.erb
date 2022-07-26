@@ -1,0 +1,36 @@
+<div class="text-input">
+  <%= simple_form_for [@channel, @message],
+    remote: true,
+    html: {data: {action: "ajax:success->community-subscription#resetForm"} } do |f|
+  %>
+
+  <div class="community-chat-box">
+    <div class="row">
+      <div class="col-2 pt-1 shadow-sm">
+        <%= cl_image_tag current_user.photo.key, class: :av , height: 150, width: 150, crop: :fill, gravity: :face %>
+      </div>
+      <div class="col-8 px-1">
+        <%= f.input :content,
+          label: false,
+          placeholder: "Message our ##{@channel.name}",
+          wrapper_html: {class: "flex-grow-1"},
+          input_html: {
+            class: "input-height font-set p-3",
+            data: { community_subscription_target: "input" }
+          }
+        %>
+      </div>
+
+      <div class="col-2 me-n1 mt-3">
+        <div class="d-flex justify-content-end">
+          <%= f.submit "POST", class:"btn font-set mb-1 " %>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <% end %>
+</div>

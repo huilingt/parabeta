@@ -1,0 +1,28 @@
+<div class="facility-page">
+  <%= render "facilities/facility_details" %>
+
+  <hr class="solid">
+
+  <%= render "facilities/facility_map" %>
+
+  <hr class="solid">
+
+  <h3 class="ms-3 my-3">
+    User Reviews ( <%= pluralize @facility.reviews.size,"review" %> )
+  </h3>
+
+  <% if @facility.reviews.blank? == true %>
+    <h6>Be the first to leave a review for <%= @facility.name %></h6>
+  <% else %>
+    <%= render "facilities/review_card_component" %>
+  <% end %>
+
+  <div class="d-flex justify-content-center">
+    <% if user_signed_in? %>
+      <%= link_to "Add Review", new_facility_review_path(@facility), class: "btn btn-gradient my-3" %>
+    <% else %>
+      <%= link_to "Review Now", new_user_session_path, class: "btn btn-gradient" %>
+    <% end %>
+  </div>
+
+  </div>

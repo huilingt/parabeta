@@ -1,0 +1,36 @@
+<div class="community-background">
+
+   <h1 class="d-flex justify-content-center py-3 community-name"># Our <%= @channel.name %></h1>
+
+  <div class="container channel-screen"
+    data-controller="community-subscription"
+    data-community-subscription-community-id-value="<%= @channel.id %>">
+
+
+    <%# message %>
+    <div class="content" data-community-subscription-target="messages">
+      <% @combined_content.each do |content| %>
+        <% if content.class == Message %>
+
+
+          <% if content.user == current_user %>
+            <%= render "channels/message", message: content%>
+          <% else %>
+            <%= render "channels/message_left", message: content %>
+          <% end %>
+
+
+        <% elsif content.class == Review %>
+          <%= render "channels/review", review: content %>
+        <% end %>
+      <% end %>
+
+      <%# text input box %>
+      <div class="mt-3">
+        <%= render "channels/show" %>
+      </div>
+
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,63 @@
+
+<h3 class="mb-3">User Reviews</h3>
+
+<% if @facility.reviews.blank? == true %>
+  <h6>Be the first to leave a review for <%= @facility.name %></h6>
+
+<% else %>
+  <% @facility.reviews.each do |review| %>
+    <div class="review-card">
+      <div class="user-profile d-flex">
+
+        <div class="row username">
+
+          <div class="col-2">
+            <img src="https://source.unsplash.com/random" alt="avatar" class="avatar">
+          </div>
+
+          <div class="col-10 mt-2">
+            <h4>John</h4>
+            <%# currently we do not have username in user model %>
+            <% review.user.email %>
+          </div>
+        </div>
+
+        <div class="col-7">
+          <%= render "facilities/facility_rating" %>
+        </div>
+
+      </div>
+
+      <img src="https://source.unsplash.com/SpuUH2QBc3A" alt="" width="100%">
+
+      <div class="row review-comments">
+        <div class="col-12 mt-2">
+          <span>
+            <h6><%= review.content %></h6>
+          </span>
+        </div>
+      </div>
+
+      <div class="comment-section" data-controller="review_form">
+        <div class="row">
+          <div class="col-4">
+            <i class="fa-regular fa-thumbs-up"> Like </i>
+          </div>
+
+          <div class="col-4">
+            <i class="fa-solid fa-share-nodes"> Share</i>
+          </div>
+
+          <div class="comment-button" data-display-comment-target="comment">
+
+            <div class="col-4" data-action="click->displaycomment#displayForm">
+              <i class="fa-regular fa-comment">Comment <%= review.comments.count %></i>
+            </div>
+
+          </div>
+
+        </div>
+        <%= render "comments/comment_card", html:{ class: "d-none", data: { display_comment_target: "form"} } %>
+      </div>
+  <% end %>
+<% end %>

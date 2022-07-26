@@ -1,0 +1,41 @@
+<h2>Resend unlock instructions</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.full_error :unlock_token %>
+
+  <div class="form-inputs">
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                input_html: { autocomplete: "email" } %>
+  </div>
+    <div class="row col-12" data-controller="review-form" >
+        <%= simple_form_for [@facility, @review] do |f| %>
+          <%= f.hidden_field :user_id, label: "user_id", value: @review.user_id %>
+          <%= f.hidden_field :facility_id, label: "facility_id", value: @review.facility_id %>
+          <div class="row" >
+
+            <% @facility.rating_types.each do |rating_type| %>
+                <div class="rating" data-controller="rating-star">
+                  <p><strong><%= rating_type.name %></strong></p>
+
+                  <% (1..5).each do |i| %>
+                    <span class="fa fa-star fa-2xl" data-action="click->rating-star#rate"
+                      data-stars="<%= i %>">
+                    </span>
+                  <% end %>
+
+                  <input type="hidden" name="<%= "Type" + rating_type.id.to_s %>" value="<%= rating_type.id %>" />
+                  <input type="hidden" class="rating-value" name="<%= "Rating" + rating_type.id.to_s %>" data-rating-star-target="input"/>
+                  <div class="text-danger rating-value-error mt-3" style="display:none" >This field is required</div>
+                </div>
+
+            <% end %>
+          </div>
+  <div class="form-actions">
+    <%= f.button :submit, "Resend unlock instructions" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

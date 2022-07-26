@@ -1,0 +1,24 @@
+<div id="message-<%= message.id %>" class="message">
+  <div class="community-message-card d-flex">
+
+    <%# Avatar %>
+      <%= cl_image_tag message.user.photo.key, class: :av , height: 150, width: 150, crop: :fill, gravity: :face %>
+
+    <%# Description %>
+    <div>
+      <div class=" message-description ps-4 pt-2 mb-1 ms-4">
+        <%# Review comments %>
+        <small>
+          <span><h6><%= message.content[0..150] %></h6></span>
+        </small>
+      </div>
+
+      <div>
+        <%# Time sent ago %>
+        <% timecreated = message.created_at %>
+        <i class="d-flex justify-content-end"><%= time_ago_in_words(timecreated).gsub('about','') + ' ago' %></i>
+      </div>
+    </div>
+
+  </div>
+</div>

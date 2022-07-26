@@ -1,0 +1,16 @@
+<div class="container">
+  <table>
+    <% @rating_types.each do |rating_type| %>
+      <tr>
+        <td><%= @rating_type.name %></td>
+        <td>
+          <ul class="rating">
+            <% (1..5).each do |i| %>
+              <i class="rating_star"></i>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

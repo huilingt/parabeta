@@ -1,0 +1,79 @@
+<div class="container my-5 form">
+
+  <% if @facilities.empty? %>
+    <h1>Sorry, "<%= @query.capitalize %>" could not be found &#x1F615;</h1>
+    <br>
+    <%= cl_image_tag("searchgoogle_enyipo", width:'100%') %>
+      <%= link_to "http://maps.google.com/maps?q=#{@query}", target: :_blank do %>
+
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-gradient mt-3">Search on Google?</button>
+
+    </div>
+  <% end %>
+</div>
+
+
+  <% else %>
+    <h1>Here's what we've found...</h1>
+
+    <% @facilities.each do |facility| %>
+      <div class="verified-card my-3", style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://source.unsplash.com/N_Y88TWmGwA')">
+        <div class="col-8 details">
+          <h2><%= link_to facility.name, facility_path(facility) %></h2>
+            <p><%= facility.distance  %> metres away</p>
+            <span><%= facility.address %></span>
+            <div>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </div>
+        </div>
+
+
+      <div class="col-4 status">
+        <div class="badge badge-verified">
+          <% if facility.verified_status == true %>
+            <h3>Verified</h3>
+          <% else %>
+            <h3 >Unverified</h3>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+  <% end %>
+
+
+<div class="container-fluid">
+  <h4 class="mt-5 pt-5">Would you like to make another search?</h4>
+
+    <div class="row align-items-center ">
+      <div class="col-8 ms-n1">
+        <%= form_tag search_facilities_path, method: :get do %>
+          <%= text_field_tag :name,
+                    params[:name],
+                      class: "form-control rounded-pill ms-2",
+                    placeholder: "Search by Name"%>
+
+      </div>
+
+      <div class="col-4">
+        <%= submit_tag "Search", class: "my-3 btn btn-gradient ms-n3" %>
+      </div>
+        <% end %>
+
+    </div>
+
+
+</div>
+
+<div class="mx-3 d-flex justify-content-center mt-">
+  <p class=" d-flex justify-content between">
+  <%= link_to "Back", request.referer.present? ? request.referer : root_path, class:"btn btn-back-long mt-3" %>
+  <%= link_to "Home", root_path, class:"btn btn-back-long mx-3 mt-3" %>
+  </p>
+</div>

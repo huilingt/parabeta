@@ -1,0 +1,30 @@
+<div class="container">
+<h2>Review</h2>
+<h3><%= @facility.name %></h3>
+  <table>
+    <% RatingType.all.each do |rating_type| %>
+      <tr>
+        <td><%= rating_type.name %></td>
+        <td>
+          <ul class="rating">
+            <% (1..5).each do |i| %>
+              <i class="rating_stars fa-regular fa-star fa-2xl"></i>
+            <% end %>
+          </ul>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<br>
+<div class="row col-10 mx-auto">
+  <div class="col-2">
+    <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar" %>
+  </div>
+  <div class="col-2">
+    <%= @user.firstname %>
+  </div>
+  <br>
+  <br>
+  <p><%= @review.content %></p>
+</div>

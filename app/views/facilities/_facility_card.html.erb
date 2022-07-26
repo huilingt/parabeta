@@ -1,0 +1,62 @@
+<div class="verified-card", style="
+background-image: url('<%= cl_image_path facility.photo.key %>')">
+  <div class="verified-card-background zindex-5"></div>
+  <div class="icons zindex-10"><i class="fa-solid fa-wheelchair fs-4"></i></div>
+    <div class="d-flex justify-content-between align-items-end mt-4 zindex-10">
+
+
+
+      <div class="details textwhite-shadow zindex-10">
+         <h2><%= facility.name %></h2>
+          <p><%= facility.distance  %> metres away</p>
+          <span><%= facility.address %></span>
+
+          <% reviews = facility.reviews %>
+          <% sum = 0 %>
+          <% count = 0 %>
+          <% reviews.each do |review| %>
+            <% review.review_ratings.each do |review_rating| %>
+              <% sum += review_rating.rating %>
+              <% count += 1 %>
+            <% end %>
+           <% end %>
+          <% average_rating = count != 0 ? sum.fdiv(count).round : 0 %>
+
+         <div>
+
+
+              <div class="five-stars mt-3 d-flex justify-content-between">
+                <div class="row">
+                  <div class="col-12">
+
+                    <% (1..5).each do |i| %>
+                    <% if i <= average_rating %>
+                        <li class="fa fa-star selected"></li>
+                    <% else %>
+                        <li class="fa fa-star"></li>
+                    <% end %>
+                    <% end %>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+        </div>
+      </div>
+
+
+
+      <div class="d-flex justify-content-end  zindex-10">
+        <div class="status">
+          <div class="badge badge-verified">
+            <% if facility.verified_status == true %>
+              <h3 class="d-flex align-item-center">Verified</h3>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
