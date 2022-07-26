@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_07_26_081324) do
+ActiveRecord::Schema.define(version: 2022_07_26_084308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,4 +21,21 @@ ActiveRecord::Schema.define(version: 2022_07_26_081324) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "facilities", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "phone"
+    t.string "price_range"
+    t.boolean "verified_status"
+    t.date "verified_date"
+    t.integer "distance"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_facilities_on_category_id"
+  end
+
+  add_foreign_key "facilities", "categories"
 end

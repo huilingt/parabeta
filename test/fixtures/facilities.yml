@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  address: MyString
+  phone: MyString
+  price_range: MyString
+  verified_status: false
+  verified_date: 2022-07-26
+  distance: 1
+  latitude: 1.5
+  longitude: 1.5
+  category: one
+
+two:
+  name: MyString
+  address: MyString
+  phone: MyString
+  price_range: MyString
+  verified_status: false
+  verified_date: 2022-07-26
+  distance: 1
+  latitude: 1.5
+  longitude: 1.5
+  category: two
